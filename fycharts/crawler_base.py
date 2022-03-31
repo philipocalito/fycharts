@@ -8,6 +8,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 import re
+import cloudscraper
 
 from .log_config import logger
 
@@ -69,6 +70,7 @@ class SpotifyChartsBase(object):
 
 			try:
 				s = requests.Session()
+                s = cloudscraper.Cloudscraper() # add clouscraper. Inherits from reques.Session()
 				s.mount("https://", HTTPAdapter(max_retries = retries))
 				res = s.get(url, headers = headers, timeout = 3)
 
